@@ -1,0 +1,25 @@
+
+<h2>Basic List</h2>
+
+<div class="error-wrapper" *ngIf="(error$ | async)">
+    <bold>Error: </bold>{{(error$ | async)?.message}}
+</div>
+
+<div *ngIf="!(error$ | async)">
+
+    <div class="loading-wrapper">
+        <span *ngIf="(loading$ | async)">{{(loading$ | async)}}</span>
+    </div>
+
+    <ul>
+        <li *ngFor="let item of items" >
+            <listr-item [item]="item"></listr-item>
+        </li>
+    </ul>
+
+</div>
+
+<button (click)="reset()">Reset</button>
+<button>Save</button>
+
+<pre>{{items | json}}</pre>

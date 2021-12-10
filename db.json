@@ -1,0 +1,39 @@
+{
+  "list": [
+    {
+      "id": "51d7b916-bf42-4755-9d7a-1ff932874dfb",
+      "selected": true,
+      "name": "Houses"
+    },
+    {
+      "id": "fd7326ff-d8d9-4e32-abf4-b504ee24f578",
+      "name": "Truck"
+    },
+    {
+      "id": "284514b9-cdb4-4fcd-b39e-75ad5839782c",
+      "name": "Trailer"
+    },
+    {
+      "id": "2fb6ec21-0b79-4ccf-9e09-0abf3b06e062",
+      "name": "Plane"
+    },
+    {
+      "id": "e7dc098f-01fb-4114-aea7-783967e5e4ff",
+      "name": "Skates"
+    },
+    {
+      "id": "ee2e9e12-23d8-40ed-8ced-ac0ea880ab7b",
+      "name": "Elephant"
+    },
+    {
+      "id": "767f7df2-d500-41dd-8b26-75d4b52977bc",
+      "name": "Things",
+      "selected": false
+    },
+    {
+      "id": "ff4dd4d1-2c0a-49c8-9f95-940d0ae5296a",
+      "selected": false,
+      "name": "Bits"
+    }
+  ]
+}
