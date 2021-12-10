@@ -1,7 +1,15 @@
+.item-wrapper{
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    width: 100%;
+    background-color: lightsteelblue;
+    margin-bottom: 2px;;    
+}
 
 .dirty{
-
-    background-color: lightgrey;
+    background-color: lightskyblue!important;
+    border: maroon 1px dotted;
 }
 
 input[text] {

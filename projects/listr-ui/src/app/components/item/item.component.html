@@ -1,4 +1,4 @@
-<span [ngClass]="{'dirty': item.dirty }">
+<span class="item-wrapper" [ngClass]="{'dirty': dirty }">
     <input  type="checkbox" 
             [(ngModel)]="item.selected" 
             (input)="modelChanges($event)"
@@ -8,7 +8,8 @@
             [(ngModel)]="item.name" 
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
-</span>
 
-<button [disabled]="!dirty" (click)="save()" >Save</button>
-<button [disabled]="dirty" (click)="delete()" >Delete</button>
+    <button [disabled]="!dirty" (click)="save()" >Save</button>
+    <button [disabled]="!dirty" (click)="reset()" >Reset</button>
+    <button [disabled]="dirty" (click)="delete()" >Delete</button>
+</span>

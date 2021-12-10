@@ -49,11 +49,14 @@ export const ListReducer = createReducer(
       ...state, 
       loading:'Editing item...' 
     })),
-    on(Actions.EditItemSuccess,(state,action) => ({
-      ...state, 
-      list: [...state.list],
-      loading: ''
-    })),
+    on(Actions.EditItemSuccess,(state,action) => {
+      const updatedList = state.list.map(item => action.item.id === item.id ? action.item : item);
+      return {
+        ...state,
+        list: updatedList,
+        loading: ''
+        };
+    }),
     on(Actions.EditItemFailure,(state,action) => ({
       ...state, 
       loading:'',

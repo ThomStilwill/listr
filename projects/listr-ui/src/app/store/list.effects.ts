@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType  } from '@ngrx/effects';
 import { of } from "rxjs";
 import { map, catchError, mergeMap, tap } from "rxjs/operators";
+import { ListItem } from "../models/list-item.model";
 import { ListService } from "../services/list.service";
 import  * as actions  from "./list.actions";
 
@@ -33,7 +34,10 @@ export class ListEffects{
             mergeMap(payload => this.listService.addlistItem(payload.item)
                 .pipe(
                         tap(_=>console.log('add')) ,
-                        map(() => actions.AddItemSuccess({item:payload.item}))
+                        map((item: ListItem) => {
+                            console.log(item)
+                            return actions.AddItemSuccess({item: item})
+                        })
                      )
                 )
                 ,catchError(error => of(actions.AddItemFailure({error})))

@@ -1,24 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs/operators';
+import { Actions, ofType } from '@ngrx/effects';
+import { filter, map, takeUntil} from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { ListItem } from '../../models/list-item.model';
 import { AppState } from '../../store/app-state.model';
-import * as Actions from '../../store/list.actions';
+import * as actions from '../../store/list.actions';
 
 @Component({
   selector: 'listr-basic',
   templateUrl: './basic.component.html',
   styleUrls: ['./basic.component.scss']
 })
-export class BasicComponent implements OnInit {
-
+export class BasicComponent implements OnInit, OnDestroy {
+  destroyed$ = new Subject<boolean>();
+  
   items$ = this.store.select(store => store.items.list);
   loading$ = this.store.select(store => store.items.loading);
   error$ = this.store.select(store => store.items.error);
 
   items: ListItem[];
+  itemToAdd: ListItem = null;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, updates$: Actions) { 
+    updates$.pipe(
+      ofType(actions.AddItemSuccess),
+      takeUntil(this.destroyed$)
+   )
+   .subscribe(() => {
+    this.itemToAdd = null;
+   });
+
+  }
+  
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
 
   ngOnInit(): void {
 
@@ -31,11 +49,32 @@ export class BasicComponent implements OnInit {
         this.items = array
       );
 
-    this.store.dispatch(Actions.LoadItems({loading:'loading'}));
+    this.store.dispatch(actions.LoadItems({loading:'loading'}));
+
   }
 
   reset(){
-    this.items.forEach(item => item.dirty = false)
+    
+  }
+
+  saveItem(item: ListItem){
+    this.store.dispatch(actions.EditItem({item: item}));
+  }
+
+  saveNewItem(item: ListItem){
+    this.store.dispatch(actions.AddItem({item: item}));
+  }
+
+  deleteItem(item: ListItem){
+    this.store.dispatch(actions.DeleteItem({id: item.id}));
+  }
+
+  cancelAdd(){
+    this.itemToAdd = null;
+  }
+
+  showNewItem(){
+    this.itemToAdd = new ListItem(null,'',false);
   }
 
 }

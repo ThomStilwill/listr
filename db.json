@@ -2,11 +2,12 @@
   "list": [
     {
       "id": "51d7b916-bf42-4755-9d7a-1ff932874dfb",
-      "selected": true,
-      "name": "Houses"
+      "selected": false,
+      "name": "House"
     },
     {
       "id": "fd7326ff-d8d9-4e32-abf4-b504ee24f578",
+      "selected": false,
       "name": "Truck"
     },
     {
@@ -20,10 +21,6 @@
     {
       "id": "e7dc098f-01fb-4114-aea7-783967e5e4ff",
       "name": "Skates"
-    },
-    {
-      "id": "ee2e9e12-23d8-40ed-8ced-ac0ea880ab7b",
-      "name": "Elephant"
     },
     {
       "id": "767f7df2-d500-41dd-8b26-75d4b52977bc",

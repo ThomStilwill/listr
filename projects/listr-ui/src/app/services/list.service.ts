@@ -24,6 +24,7 @@ export class ListService {
   addlistItem(newItem: ListItem) {
     return this.http.post(this.list_URL, newItem)
       .pipe(
+        tap(x => console.log(x)),
         delay(500)
       )
   }
@@ -31,6 +32,7 @@ export class ListService {
   editlistItem(item: ListItem) {
     return this.http.put(`${this.list_URL}/${item.id}`, item)
       .pipe(
+        tap(x => console.log(x)),
         delay(500)
       )
   }

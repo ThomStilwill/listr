@@ -1,4 +1,3 @@
-
 <h2>Basic List</h2>
 
 <div class="error-wrapper" *ngIf="(error$ | async)">
@@ -13,13 +12,26 @@
 
     <ul>
         <li *ngFor="let item of items" >
-            <listr-item [item]="item"></listr-item>
+            <listr-item 
+                [item]="item"
+                (saveItem)="saveItem($event)"
+                (deleteItem)="deleteItem($event)"
+                >
+            </listr-item>
         </li>
     </ul>
 
 </div>
 
-<button (click)="reset()">Reset</button>
-<button>Save</button>
+<listr-item *ngIf="itemToAdd"
+    [item]="itemToAdd"
+    (addItem)="saveNewItem($event)"
+    (deleteItem)="cancelAdd()"
+    (resetAdd)="cancelAdd()"
+    >
+</listr-item>
 
-<pre>{{items | json}}</pre>
+<button (click)="reset()">Reset</button>
+<button (click)="showNewItem()">Add</button>
+
+<!-- <pre>{{items | json}}</pre> -->
