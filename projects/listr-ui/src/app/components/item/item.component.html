@@ -1,5 +1,9 @@
-<span class="item-wrapper" [ngClass]="{'dirty': dirty }">
-    <input  type="checkbox" 
+<span  class="item-wrapper" 
+       [ngClass]="{'dirty': dirty }" 
+       fxLayout="row">
+
+    <div fxFlex>
+        <input  type="checkbox" 
             [(ngModel)]="item.selected" 
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
@@ -8,7 +12,8 @@
             [(ngModel)]="item.name" 
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
-
+    </div>
+    <div fxFlex="6em">
         <button [disabled]="!dirty" (click)="save()" mat-icon-button >
                 <i class="material-icons">check_circle</i>
         </button>
@@ -20,4 +25,5 @@
         <button [disabled]="dirty" (click)="delete()" mat-icon-button >
                 <i class="material-icons">delete</i>
         </button>
+    </div>
 </span>

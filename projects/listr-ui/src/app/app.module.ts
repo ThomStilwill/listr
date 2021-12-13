@@ -17,6 +17,7 @@ import { ListEffects } from './store/list.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
+import { FlexLayoutModule } from '@angular/flex-layout';  
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/d
     EffectsModule.forRoot([ListEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule 
   ],
   providers: [ListService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS,
