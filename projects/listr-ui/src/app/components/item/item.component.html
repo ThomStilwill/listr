@@ -4,12 +4,20 @@
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
 
-    <input  type=text 
+        <input  type=text 
             [(ngModel)]="item.name" 
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
 
-    <button [disabled]="!dirty" (click)="save()" >Save</button>
-    <button [disabled]="!dirty" (click)="reset()" >Reset</button>
-    <button [disabled]="dirty" (click)="delete()" >Delete</button>
+        <button [disabled]="!dirty" (click)="save()" mat-icon-button >
+                <i class="material-icons">check_circle</i>
+        </button>
+
+        <button [disabled]="!dirty" (click)="reset()" mat-icon-button >
+                <i class="material-icons">cancel</i>
+        </button>
+        
+        <button [disabled]="dirty" (click)="delete()" mat-icon-button >
+                <i class="material-icons">delete</i>
+        </button>
 </span>

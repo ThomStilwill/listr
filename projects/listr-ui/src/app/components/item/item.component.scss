@@ -1,21 +1,29 @@
 .item-wrapper{
     display: inline-block;
-    height: 2em;
-    line-height: 2em;
+    height: 3em;
+    line-height: 3em;
     width: 100%;
     background-color: lightsteelblue;
-    margin-bottom: 2px;;    
+    margin-bottom: 2px;    
 }
 
 .dirty{
     background-color: lightskyblue!important;
-    border: maroon 1px dotted;
 }
 
-input[text] {
+input[type='text'] {
     background-color: inherit;
     font-weight: inherit;
     display: inline;
     width: 20em;
 }
 
+button {
+    color: white;
+}
+
+input[type='checkbox'] {
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: middle;
+}

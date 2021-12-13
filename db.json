@@ -1,16 +1,6 @@
 {
   "list": [
     {
-      "id": "51d7b916-bf42-4755-9d7a-1ff932874dfb",
-      "selected": false,
-      "name": "House"
-    },
-    {
-      "id": "fd7326ff-d8d9-4e32-abf4-b504ee24f578",
-      "selected": false,
-      "name": "Truck"
-    },
-    {
       "id": "284514b9-cdb4-4fcd-b39e-75ad5839782c",
       "name": "Trailer"
     },
@@ -31,6 +21,11 @@
       "id": "ff4dd4d1-2c0a-49c8-9f95-940d0ae5296a",
       "selected": false,
       "name": "Bits"
+    },
+    {
+      "id": "n-4xY0c",
+      "selected": false,
+      "name": "Stuff"
     }
   ]
 }

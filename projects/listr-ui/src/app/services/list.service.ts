@@ -1,46 +1,45 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ListItem } from '../models/list-item.model';
 import { delay, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { APP_CONFIG, AppConfig } from '../app-config.module';
+import { ListItem } from '../models/list-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
 
-  private list_URL = "http://localhost:3000/list"
+  delayMs: number = this.config.endpointDelayMs ?? 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              @Inject(APP_CONFIG) private config: AppConfig ) { }
 
   getlistItems() {
-    return this.http.get<Array<ListItem>>(this.list_URL)
+    return this.http.get<Array<ListItem>>(this.config.endpoint)
       .pipe(
-        //tap(()=> {throw new Error("something broke!")}),
-        delay(500)
+        delay(this.delayMs)
     )
   }
 
   addlistItem(newItem: ListItem) {
-    return this.http.post(this.list_URL, newItem)
+    return this.http.post(this.config.endpoint, newItem)
       .pipe(
-        tap(x => console.log(x)),
-        delay(500)
+        delay(this.delayMs)
       )
   }
 
   editlistItem(item: ListItem) {
-    return this.http.put(`${this.list_URL}/${item.id}`, item)
+    return this.http.put(`${this.config.endpoint}/${item.id}`, item)
       .pipe(
-        tap(x => console.log(x)),
-        delay(500)
+        delay(this.delayMs)
       )
   }
 
   deletelistItem(id: string) {
-    return this.http.delete(`${this.list_URL}/${id}`)
+    return this.http.delete(`${this.config.endpoint}/${id}`)
       .pipe(
-        delay(500)
+        delay(this.delayMs)
       )
   }
 
