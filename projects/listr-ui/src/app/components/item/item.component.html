@@ -3,7 +3,7 @@
        fxLayout="row">
 
     <div fxFlex>
-        <input  type="checkbox" 
+        <input type="checkbox" 
             [(ngModel)]="item.selected" 
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
@@ -13,16 +13,16 @@
             (input)="modelChanges($event)"
             [ngModelOptions]="{standalone: true}"/>
     </div>
-    <div fxFlex="6em">
-        <button [disabled]="!dirty" (click)="save()" mat-icon-button >
+    <div fxFlex="6em" style="text-align: right">
+        <button [hidden]="!dirty" (click)="save()" mat-icon-button title="Save">
                 <i class="material-icons">check_circle</i>
         </button>
 
-        <button [disabled]="!dirty" (click)="reset()" mat-icon-button >
+        <button [hidden]="!dirty" (click)="reset()" mat-icon-button title="Cancel">
                 <i class="material-icons">cancel</i>
         </button>
         
-        <button [disabled]="dirty" (click)="delete()" mat-icon-button >
+        <button [hidden]="dirty" (click)="delete()" mat-icon-button title="Remove item">
                 <i class="material-icons">delete</i>
         </button>
     </div>

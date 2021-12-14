@@ -31,7 +31,11 @@
     >
 </listr-item>
 
-<button (click)="reset()">Reset</button>
-<button (click)="showNewItem()">Add</button>
+<button (click)="reset()" mat-icon-button title="Undo changes">
+    <i class="material-icons">undo</i>
+</button>
+<button (click)="showNewItem()" mat-icon-button title="Add an item">
+    <i class="material-icons">add</i>
+</button>
 
 <!-- <pre>{{items | json}}</pre> -->

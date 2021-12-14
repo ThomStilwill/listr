@@ -1,32 +1,40 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, Input, OnInit, Output, OnDestroy, EventEmitter } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { ListItem } from '../../models/list-item.model';
-import { AppState } from '../../store/app-state.model';
-import * as Actions from '../../store/list.actions';
+import { InterComponentService } from '../../services/inter-component.service';
 
 @Component({
   selector: 'listr-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
-export class ItemComponent implements OnInit  {
+export class ItemComponent implements OnInit, OnDestroy  {
 
   @Output() saveItem = new EventEmitter<ListItem>();
   @Output() deleteItem = new EventEmitter<ListItem>();
   @Output() addItem = new EventEmitter<ListItem>();
   @Output() resetAdd = new EventEmitter();
 
-  @Input()
-  item: ListItem;
+  @Input() item: ListItem;
   originalItem: ListItem;
   dirty = false;
+  subscription: Subscription;
 
-  constructor() { 
+  constructor(private service : InterComponentService) { 
 
   }
 
   ngOnInit(): void {
     this.originalItem = new ListItem(this.item.id, this.item.name, this.item.selected);
+    
+    this.subscription =  this.service.observable$.subscribe(event => {
+        //console.log(`subject called with: ${this.item.name} ${event}`);
+         this.reset();
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   modelChanges(value): void {

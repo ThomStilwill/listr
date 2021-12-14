@@ -4,7 +4,8 @@
     line-height: 3em;
     width: 100%;
     background-color: lightsteelblue;
-    margin-bottom: 2px;    
+    margin-bottom: 2px;  
+    padding: 0 0.5em;  
 }
 
 .dirty{
@@ -16,6 +17,10 @@ input[type='text'] {
     font-weight: inherit;
     display: inline;
     width: 20em;
+}
+
+input[type="checkbox"] {
+    margin-right:0.5em;
 }
 
 button {

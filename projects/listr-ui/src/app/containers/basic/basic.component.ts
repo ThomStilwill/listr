@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { filter, map, takeUntil} from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { ListItem } from '../../models/list-item.model';
 import { AppState } from '../../store/app-state.model';
 import * as actions from '../../store/list.actions';
+import { InterComponentService } from '../../services/inter-component.service';
 
 @Component({
   selector: 'listr-basic',
@@ -13,6 +14,7 @@ import * as actions from '../../store/list.actions';
   styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit, OnDestroy {
+
   destroyed$ = new Subject<boolean>();
   
   items$ = this.store.select(store => store.items.list);
@@ -22,7 +24,9 @@ export class BasicComponent implements OnInit, OnDestroy {
   items: ListItem[];
   itemToAdd: ListItem = null;
 
-  constructor(private store: Store<AppState>, updates$: Actions) { 
+  constructor(private store: Store<AppState>, 
+              updates$: Actions,
+              private service : InterComponentService) { 
     updates$.pipe(
       ofType(actions.AddItemSuccess),
       takeUntil(this.destroyed$)
@@ -54,7 +58,7 @@ export class BasicComponent implements OnInit, OnDestroy {
   }
 
   reset(){
-    
+    this.service.command('reset');
   }
 
   saveItem(item: ListItem){
