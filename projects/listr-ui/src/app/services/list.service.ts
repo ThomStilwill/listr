@@ -24,14 +24,12 @@ export class ListService {
 
     this.selectedList$
     .pipe(
-      //filter(data => !!data),
       map(selectedList => selectedList)
     ).subscribe((selectedList: string) =>
       {
         this.selectedList = selectedList
       }
     );
-
   }
 
   getlistItems() {
