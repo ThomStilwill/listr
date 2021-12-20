@@ -5,12 +5,16 @@ import { ListItem } from '../models/list-item.model';
 
 export interface ListState {
   list: ListItem[],
+  lists: string[],
+  selectedList: string,
   loading: string,
   error: any;
 }
 
 export const initialState: ListState = {
   list: [],
+  lists: [],
+  selectedList: '',
   loading: '',
   error: undefined
 };
@@ -76,5 +80,34 @@ export const ListReducer = createReducer(
       ...state, 
       loading:'',
       error:action.error
+    })),
+
+    on(Actions.Lists, (state) => ({
+      ...state,
+      loading: 'Loading lists...',
+    })),
+    on(Actions.ListsSuccess, (state, action) => ({
+      ...state,
+      lists: action.lists,
+      loading: '',
+    })),
+    on(Actions.ListsFailure, (state, action) => ({
+      ...state,
+      loading: '',
+      error: action.error
+    })),
+
+    on(Actions.SelectedList, (state, action) => ({
+      ...state,
+      selectedList: action.selectedList,
+    })),
+    on(Actions.SelectedListSuccess, (state, action) => ({
+      ...state,
+      selectedList: action.selectedList,
+    })),
+    on(Actions.SelectedListFailure, (state, action) => ({
+      ...state,
+      error: action.error
     }))
+
 );    

@@ -1,26 +1,34 @@
 <h2>Basic List</h2>
 
+<mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(ngModel)]="selectedList" (ngModelChange)="onSelectList()" name="list">
+        <mat-option [value]="" selected> - none - </mat-option>
+        <mat-option *ngFor="let list of lists" [value]="list">
+        {{list}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
 <div class="error-wrapper" *ngIf="(error$ | async)">
     <bold>Error: </bold>{{(error$ | async)?.message}}
 </div>
 
 <div *ngIf="!(error$ | async)">
-
     <div class="loading-wrapper">
         <span *ngIf="(loading$ | async)">{{(loading$ | async)}}</span>
     </div>
-
     <ul>
         <li *ngFor="let item of items" >
             <listr-item 
                 [item]="item"
                 (saveItem)="saveItem($event)"
                 (deleteItem)="deleteItem($event)"
+                (setDirty)="setDirty($event)"
                 >
             </listr-item>
         </li>
     </ul>
-
 </div>
 
 <listr-item *ngIf="itemToAdd"
@@ -31,11 +39,11 @@
     >
 </listr-item>
 
-<button (click)="reset()" mat-icon-button title="Undo changes">
+<button (click)="reset()" [disabled]="!dirty" mat-icon-button title="Undo changes">
     <i class="material-icons">undo</i>
 </button>
-<button (click)="showNewItem()" mat-icon-button title="Add an item">
+<button (click)="showNewItem()" [disabled]="dirty" mat-icon-button title="Add an item">
     <i class="material-icons">add</i>
 </button>
 
-<!-- <pre>{{items | json}}</pre> -->
+{{dirty}}

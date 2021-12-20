@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { delay, filter, map } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { ListItem } from '../models/list-item.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app-state.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,37 +12,64 @@ import { ListItem } from '../models/list-item.model';
 export class ListService {
 
   delayMs: number = this.config.endpointDelayMs ?? 0;
+  url = this.config.endpoint;
+  selectedList = 'general';
+
+  selectedList$ = this.store.select(store => store.items.selectedList);
 
   constructor(private http: HttpClient,
-              @Inject(APP_CONFIG) private config: AppConfig ) { }
+              @Inject(APP_CONFIG) private config: AppConfig,
+              private store: Store<AppState> ) {
+
+    this.selectedList$
+    .pipe(
+      //filter(data => !!data),
+      map(selectedList => selectedList)
+    ).subscribe((selectedList: string) =>
+      {
+        this.selectedList = selectedList
+      }
+    );
+
+  }
 
   getlistItems() {
-    return this.http.get<Array<ListItem>>(this.config.endpoint)
+    const endpoint = `${this.url}/${this.selectedList}`;
+    return this.http.get<Array<ListItem>>(endpoint)
       .pipe(
         delay(this.delayMs)
     )
   }
 
   addlistItem(newItem: ListItem) {
-    return this.http.post(this.config.endpoint, newItem)
+    const endpoint = `${this.url}/${this.selectedList}`;
+    return this.http.post(endpoint, newItem)
       .pipe(
         delay(this.delayMs)
       )
   }
 
   editlistItem(item: ListItem) {
-    return this.http.put(`${this.config.endpoint}/${item.id}`, item)
+    const endpoint = `${this.url}/${this.selectedList}`;
+    return this.http.put(`${endpoint}/${item.id}`, item)
       .pipe(
         delay(this.delayMs)
       )
   }
 
   deletelistItem(id: string) {
-    return this.http.delete(`${this.config.endpoint}/${id}`)
+    const endpoint = `${this.url}/${this.selectedList}`;
+    return this.http.delete(`${endpoint}/${id}`)
       .pipe(
         delay(this.delayMs)
       )
   }
 
+  getAllLists() {
+    const endpoint = `${this.url}/lists`;
+    return this.http.get<string[]>(endpoint)
+      .pipe(
+        delay(this.delayMs)
+    )
+  }
 }
-

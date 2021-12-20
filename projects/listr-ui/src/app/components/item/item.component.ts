@@ -1,45 +1,43 @@
-import { Component, Input, OnInit, Output, OnDestroy, EventEmitter } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ListItem } from '../../models/list-item.model';
 import { InterComponentService } from '../../services/inter-component.service';
+import { AutoUnsubscribe } from '../../shared/modules/material/auto-unsubscribe';
 
+@AutoUnsubscribe
 @Component({
   selector: 'listr-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
-export class ItemComponent implements OnInit, OnDestroy  {
+export class ItemComponent implements OnInit  {
 
   @Output() saveItem = new EventEmitter<ListItem>();
   @Output() deleteItem = new EventEmitter<ListItem>();
   @Output() addItem = new EventEmitter<ListItem>();
   @Output() resetAdd = new EventEmitter();
 
+  @Output() setDirty = new EventEmitter<boolean>();
+
   @Input() item: ListItem;
   originalItem: ListItem;
   dirty = false;
   subscription: Subscription;
 
-  constructor(private service : InterComponentService) { 
-
-  }
+  constructor(private service : InterComponentService) {}
 
   ngOnInit(): void {
     this.originalItem = new ListItem(this.item.id, this.item.name, this.item.selected);
     
     this.subscription =  this.service.observable$.subscribe(event => {
-        //console.log(`subject called with: ${this.item.name} ${event}`);
          this.reset();
       });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   modelChanges(value): void {
     if(this.dirty) {return}
     this.dirty = true;
+    this.setDirty.emit(true);
   }
   
   save(){
@@ -48,6 +46,7 @@ export class ItemComponent implements OnInit, OnDestroy  {
      } else {
       this.addItem.emit(this.item);
      }
+     this.setDirty.emit(false);
   }
 
   delete(){
@@ -58,6 +57,7 @@ export class ItemComponent implements OnInit, OnDestroy  {
     this.dirty = false;
     this.item.name = this.originalItem.name;
     this.item.selected = this.originalItem.selected;
+    this.setDirty.emit(false);
     this.resetAdd.emit();
   }
  

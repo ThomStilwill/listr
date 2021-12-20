@@ -69,4 +69,21 @@ export class ListEffects{
                 ,catchError(error => of(actions.DeleteItemFailure({error})))
             )
         );
+
+    lists$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(actions.Lists),
+            mergeMap(() => this.listService.getAllLists()
+                .pipe(
+                    tap(_=>console.log('load')),
+                    map(lists => 
+                        actions.ListsSuccess({
+                            lists: lists
+                        }))
+                    )
+                ),
+                catchError(error => of(actions.ListsFailure({error})),
+                )
+            )
+        );    
 }

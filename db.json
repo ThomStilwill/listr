@@ -1,5 +1,21 @@
 {
-  "list": [
+  "lists": [
+    "general",
+    "todo"
+  ],
+  "todo": [
+    {
+      "id": 1,
+      "selected": false,
+      "name": "Get christmas dinner groceries"
+    },
+    {
+      "id": 2,
+      "selected": false,
+      "name": "Brie, philo, apricot preserves"
+    }
+  ],
+  "general": [
     {
       "id": "284514b9-cdb4-4fcd-b39e-75ad5839782c",
       "name": "Trailer"
@@ -34,8 +50,8 @@
     },
     {
       "id": "XgGqwPb",
-      "selected": true,
-      "name": "hhhgjhjghjghj"
+      "selected": false,
+      "name": "My Stuff"
     }
   ]
 }

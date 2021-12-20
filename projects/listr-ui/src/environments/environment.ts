@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  endpoint: 'http://localhost:3000/list/',
+  endpoint: 'http://localhost:3000',
   endpointDelayMs: 500
 };

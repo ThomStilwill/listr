@@ -62,3 +62,32 @@ export const EditItemFailure = createAction(
     `${prefix} Edit Item failure`,
     props<{error: Error}>(),
 )
+
+export const Lists = createAction(
+    `${prefix} Lists`
+)
+
+export const ListsSuccess = createAction(
+    `${prefix} Lists success`,
+    props<{lists: string[]}>(),
+)
+
+export const ListsFailure = createAction(
+    `${prefix} Lists failure`,
+    props<{error: Error}>(),
+)
+
+export const SelectedList = createAction(
+    `${prefix} List`,
+    props<{selectedList: string}>(),
+)
+
+export const SelectedListSuccess = createAction(
+    `${prefix} Lists selected success`,
+    props<{selectedList: string}>(),
+)
+
+export const SelectedListFailure = createAction(
+    `${prefix} List selected failure`,
+    props<{error: Error}>(),
+)
