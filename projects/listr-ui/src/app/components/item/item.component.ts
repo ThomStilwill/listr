@@ -16,8 +16,7 @@ export class ItemComponent implements OnInit  {
   @Output() deleteItem = new EventEmitter<ListItem>();
   @Output() addItem = new EventEmitter<ListItem>();
   @Output() resetAdd = new EventEmitter();
-
-  @Output() setDirty = new EventEmitter<boolean>();
+  @Output() onStateChange = new EventEmitter<boolean>();
 
   @Input() item: ListItem;
   originalItem: ListItem;
@@ -28,7 +27,6 @@ export class ItemComponent implements OnInit  {
 
   ngOnInit(): void {
     this.originalItem = new ListItem(this.item.id, this.item.name, this.item.selected);
-    
     this.subscription =  this.service.observable$.subscribe(event => {
          this.reset();
       });
@@ -37,7 +35,7 @@ export class ItemComponent implements OnInit  {
   modelChanges(value): void {
     if(this.dirty) {return}
     this.dirty = true;
-    this.setDirty.emit(true);
+    this.onStateChange.emit(true);
   }
   
   save(){
@@ -46,7 +44,7 @@ export class ItemComponent implements OnInit  {
      } else {
       this.addItem.emit(this.item);
      }
-     this.setDirty.emit(false);
+     this.onStateChange.emit(false);
   }
 
   delete(){
@@ -57,9 +55,7 @@ export class ItemComponent implements OnInit  {
     this.dirty = false;
     this.item.name = this.originalItem.name;
     this.item.selected = this.originalItem.selected;
-    this.setDirty.emit(false);
+    this.onStateChange.emit(false);
     this.resetAdd.emit();
   }
- 
 }
-

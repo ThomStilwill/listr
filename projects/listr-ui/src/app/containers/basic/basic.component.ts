@@ -73,9 +73,8 @@ export class BasicComponent implements OnInit {
     
   }
 
-  onDirty(isDirty: boolean){
-    this.dirtyCount =+ isDirty?1:-1;
-
+  onStateChange(isDirty: boolean){
+    this.dirtyCount += isDirty?1:-1;
   }
 
   onSelectList(){

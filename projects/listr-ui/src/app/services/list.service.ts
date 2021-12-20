@@ -5,6 +5,7 @@ import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { ListItem } from '../models/list-item.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app-state.model';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,12 @@ export class ListService {
 
   getlistItems() {
     const endpoint = `${this.url}/${this.selectedList}`;
+
+    if(!this.selectedList) {
+      const emptyList = new Array<ListItem>()
+      return of(emptyList);
+    }
+
     return this.http.get<Array<ListItem>>(endpoint)
       .pipe(
         delay(this.delayMs)
