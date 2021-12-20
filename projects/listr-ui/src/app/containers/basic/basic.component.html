@@ -36,6 +36,7 @@
     (addItem)="saveNewItem($event)"
     (deleteItem)="cancelAdd()"
     (resetAdd)="cancelAdd()"
+    (onStateChange)="onStateChange($event)"
     >
 </listr-item>
 
@@ -46,4 +47,4 @@
     <i class="material-icons">add</i>
 </button>
 
-{{dirty}}
+{{dirty}} {{dirtyCount}}

@@ -36,6 +36,7 @@ export class ItemComponent implements OnInit  {
     if(this.dirty) {return}
     this.dirty = true;
     this.onStateChange.emit(true);
+    console.log('change: ' , value);
   }
   
   save(){
@@ -52,10 +53,12 @@ export class ItemComponent implements OnInit  {
   }
 
   reset(){
+    if(!this.dirty) {return}
     this.dirty = false;
     this.item.name = this.originalItem.name;
     this.item.selected = this.originalItem.selected;
-    this.onStateChange.emit(false);
     this.resetAdd.emit();
+    console.log('reset: ', this.item.name);
+    this.onStateChange.emit(false);
   }
 }

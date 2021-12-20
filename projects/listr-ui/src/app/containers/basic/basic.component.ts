@@ -26,7 +26,7 @@ export class BasicComponent implements OnInit {
   lists: string[];
   selectedList: string = '';
 
-  private dirtyCount = 0;
+  dirtyCount = 0;
   get dirty() { return this.dirtyCount != 0;}
 
   constructor(private store: Store<AppState>, 
@@ -62,7 +62,6 @@ export class BasicComponent implements OnInit {
 
     this.items$
       .pipe(
-        //filter(data => !!data),
         map(items => items.map(item => new ListItem(item.id,item.name,item.selected))
         )
       ).subscribe(array =>         
@@ -70,11 +69,11 @@ export class BasicComponent implements OnInit {
       );
 
     this.store.dispatch(actions.Lists());  
-    
   }
 
   onStateChange(isDirty: boolean){
     this.dirtyCount += isDirty?1:-1;
+    if (this.dirtyCount < 0) { this.dirtyCount == 0}
   }
 
   onSelectList(){

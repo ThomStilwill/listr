@@ -11,8 +11,13 @@
     },
     {
       "id": 2,
-      "selected": false,
+      "selected": true,
       "name": "Brie, philo, apricot preserves"
+    },
+    {
+      "id": 3,
+      "selected": false,
+      "name": "Alfredo sauce with chicken"
     }
   ],
   "general": [
