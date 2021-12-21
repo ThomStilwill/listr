@@ -5,7 +5,7 @@ import { filter, map} from 'rxjs/operators';
 import { ListItem } from '../../models/list-item.model';
 import { AppState } from '../../store/app-state.model';
 import * as actions from '../../store/list.actions';
-import * from '../../store/list.selectors';
+import * as listSelectors from '../../store/list.selectors';
 import { InterComponentService } from '../../services/inter-component.service';
 import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 
@@ -17,7 +17,7 @@ import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 })
 export class BasicComponent implements OnInit {
   
-  items$ = this.store.select(list);
+  items$ = this.store.select(store => store.items.list);
   lists$ = this.store.select(store => store.items.lists);
   loading$ = this.store.select(store => store.items.loading);
   error$ = this.store.select(store => store.items.error);

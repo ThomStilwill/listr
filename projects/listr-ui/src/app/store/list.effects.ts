@@ -75,12 +75,8 @@ export class ListEffects{
             ofType(actions.Lists),
             mergeMap(() => this.listService.getAllLists()
                 .pipe(
-                    tap(_=>console.log('load')),
-                    map(lists => 
-                        actions.ListsSuccess({
-                            lists: lists
-                        }))
-                    )
+                    tap(_=>console.log('lists')),
+                    map(lists => actions.ListsSuccess({lists: lists})))
                 ),
                 catchError(error => of(actions.ListsFailure({error})),
                 )

@@ -3,6 +3,8 @@ import { createReducer, on } from '@ngrx/store';
 import * as Actions from './list.actions';
 import { ListItem } from '../models/list-item.model';
 
+export const featureName = 'list';
+
 export interface ListState {
   list: ListItem[],
   lists: string[],

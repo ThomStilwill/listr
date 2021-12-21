@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';  
+import * as fromLists from "./store/list.reducer";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      items: ListReducer
+      items : ListReducer},{
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      }
     }),
     EffectsModule.forRoot([ListEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
