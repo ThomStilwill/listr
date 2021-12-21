@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { filter, map} from 'rxjs/operators';
 import { ListItem } from '../../models/list-item.model';
-import { AppState } from '../../store/app-state.model';
 import * as actions from '../../store/list.actions';
 import * as listSelectors from '../../store/list.selectors';
 import { InterComponentService } from '../../services/inter-component.service';
@@ -17,21 +16,21 @@ import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 })
 export class BasicComponent implements OnInit {
   
-  items$ = this.store.select(store => store.items.list);
-  lists$ = this.store.select(store => store.items.lists);
-  loading$ = this.store.select(store => store.items.loading);
-  error$ = this.store.select(store => store.items.error);
-  selectedList$ = this.store.select(store => store.items.selectedList);
+  items$ = this.store.select(listSelectors.items);
+  lists$ = this.store.select(listSelectors.lists);
+  loading$ = this.store.select(listSelectors.loading);
+  error$ = this.store.select(listSelectors.error);
+  selectedList$ = this.store.select(listSelectors.selectedList);
 
   items: ListItem[];
   itemToAdd: ListItem = null;
   lists: string[];
-  selectedList: string = '';
+  selectedList: string;
 
   dirtyCount = 0;
   get dirty() { return this.dirtyCount != 0;}
 
-  constructor(private store: Store<AppState>, 
+  constructor(private store: Store, 
               updates$: Actions,
               private service : InterComponentService) { 
 
@@ -56,7 +55,7 @@ export class BasicComponent implements OnInit {
       .pipe(
         filter(data => !!data),
         map(lists => lists)
-      ).subscribe(lists =>
+      ).subscribe((lists:string[]) =>
         {
           this.lists = lists;
         }
@@ -64,15 +63,15 @@ export class BasicComponent implements OnInit {
 
     this.items$
       .pipe(
-        map(items => items.map(item => new ListItem(item.id,item.name,item.selected))
+        map((items:ListItem[]) => items.map(item => new ListItem(item.id,item.name,item.selected))
         )
       ).subscribe(array =>         
         this.items = array
       );
 
     this.selectedList$
-      .subscribe(list =>         
-        this.selectedList = list
+      .subscribe((selectedList: string) =>         
+        this.selectedList = selectedList
       );
 
     this.store.dispatch(actions.Lists());  
