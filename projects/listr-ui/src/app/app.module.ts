@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
 import { ListReducer } from './store/list.reducer';
 import { ListEffects } from './store/list.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/modules/material/material.module';
+import { MaterialModule } from './shared/modules/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';  
 

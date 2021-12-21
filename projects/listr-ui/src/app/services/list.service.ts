@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, filter, map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { ListItem } from '../models/list-item.model';
 import { Store } from '@ngrx/store';

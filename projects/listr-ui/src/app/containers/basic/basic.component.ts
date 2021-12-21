@@ -6,7 +6,7 @@ import { ListItem } from '../../models/list-item.model';
 import { AppState } from '../../store/app-state.model';
 import * as actions from '../../store/list.actions';
 import { InterComponentService } from '../../services/inter-component.service';
-import { AutoUnsubscribe } from '../../shared/modules/material/auto-unsubscribe';
+import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 
 @AutoUnsubscribe
 @Component({
@@ -20,6 +20,7 @@ export class BasicComponent implements OnInit {
   lists$ = this.store.select(store => store.items.lists);
   loading$ = this.store.select(store => store.items.loading);
   error$ = this.store.select(store => store.items.error);
+  selectedList$ = this.store.select(store => store.items.selectedList);
 
   items: ListItem[];
   itemToAdd: ListItem = null;
@@ -66,6 +67,11 @@ export class BasicComponent implements OnInit {
         )
       ).subscribe(array =>         
         this.items = array
+      );
+
+    this.selectedList$
+      .subscribe(list =>         
+        this.selectedList = list
       );
 
     this.store.dispatch(actions.Lists());  

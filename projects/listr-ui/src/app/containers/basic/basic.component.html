@@ -1,50 +1,42 @@
-<h2>Basic List</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(ngModel)]="selectedList" (ngModelChange)="onSelectList()" name="list">
+            <mat-option [value]="" selected> - none - </mat-option>
+            <mat-option *ngFor="let list of lists" [value]="list">
+                {{list}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-<mat-form-field appearance="fill">
-    <mat-label>Select an option</mat-label>
-    <mat-select [(ngModel)]="selectedList" (ngModelChange)="onSelectList()" name="list">
-        <mat-option [value]="" selected> - none - </mat-option>
-        <mat-option *ngFor="let list of lists" [value]="list">
-        {{list}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-
-<div class="error-wrapper" *ngIf="(error$ | async)">
-    <bold>Error: </bold>{{(error$ | async)?.message}}
-</div>
-
-<div *ngIf="!(error$ | async)">
-    <div class="loading-wrapper">
-        <span *ngIf="(loading$ | async)">{{(loading$ | async)}}</span>
+    <div class="error-wrapper" *ngIf="(error$ | async)">
+        <bold>Error: </bold>{{(error$ | async)?.message}}
     </div>
-    <ul>
-        <li *ngFor="let item of items" >
-            <listr-item 
-                [item]="item"
-                (saveItem)="saveItem($event)"
-                (deleteItem)="deleteItem($event)"
-                (onStateChange)="onStateChange($event)"
-                >
-            </listr-item>
-        </li>
-    </ul>
-</div>
 
-<listr-item *ngIf="itemToAdd"
-    [item]="itemToAdd"
-    (addItem)="saveNewItem($event)"
-    (deleteItem)="cancelAdd()"
-    (resetAdd)="cancelAdd()"
-    (onStateChange)="onStateChange($event)"
-    >
-</listr-item>
+    <div *ngIf="!(error$ | async)">
+        <div class="loading-wrapper">
+            <span *ngIf="(loading$ | async)">{{(loading$ | async)}}</span>
+        </div>
+        <div *ngIf="!selectedList">No list selected</div>
+        <ul>
+            <li *ngFor="let item of items">
+                <listr-item [item]="item" (saveItem)="saveItem($event)" (deleteItem)="deleteItem($event)"
+                    (onStateChange)="onStateChange($event)">
+                </listr-item>
+            </li>
+        </ul>
+    </div>
 
-<button (click)="reset()" [disabled]="!dirty" mat-icon-button title="Undo changes">
-    <i class="material-icons">undo</i>
-</button>
-<button (click)="showNewItem()" [disabled]="dirty" mat-icon-button title="Add an item">
-    <i class="material-icons">add</i>
-</button>
+    <listr-item *ngIf="itemToAdd" [item]="itemToAdd" (addItem)="saveNewItem($event)" (deleteItem)="cancelAdd()"
+        (resetAdd)="cancelAdd()" (onStateChange)="onStateChange($event)">
+    </listr-item>
 
-{{dirty}} {{dirtyCount}}
+    <div *ngIf="selectedList">
+        <button (click)="reset()" [disabled]="!dirty" mat-icon-button title="Undo changes">
+            <i class="material-icons">undo</i>
+        </button>
+        <button (click)="showNewItem()" [disabled]="dirty" mat-icon-button title="Add an item">
+            <i class="material-icons">add</i>
+        </button>
+
+        <span *ngIf="dirty">There are changes to the list.</span>
+    </div>

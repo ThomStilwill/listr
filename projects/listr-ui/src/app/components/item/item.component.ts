@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ListItem } from '../../models/list-item.model';
 import { InterComponentService } from '../../services/inter-component.service';
-import { AutoUnsubscribe } from '../../shared/modules/material/auto-unsubscribe';
+import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 
 @AutoUnsubscribe
 @Component({
