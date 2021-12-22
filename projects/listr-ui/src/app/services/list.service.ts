@@ -43,7 +43,7 @@ export class ListService {
 
     return this.http.get<Array<ListItem>>(endpoint)
       .pipe(
-        tap(x => console.log(x)),
+        //tap(x => console.log(x)),
         delay(this.delayMs)
     )
   }
@@ -52,7 +52,7 @@ export class ListService {
     const endpoint = `${this.url}/${this.selectedList}`;
     return this.http.post(endpoint, newItem)
       .pipe(
-        tap(x => console.log(x)),
+        //tap(x => console.log(x)),
         delay(this.delayMs)
       )
   }
@@ -61,7 +61,7 @@ export class ListService {
     const endpoint = `${this.url}/${this.selectedList}`;
     return this.http.put(`${endpoint}/${item.id}`, item)
       .pipe(
-        tap(x => console.log(x)),
+        //tap(x => console.log(x)),
         delay(this.delayMs)
       )
   }
@@ -70,7 +70,7 @@ export class ListService {
     const endpoint = `${this.url}/${this.selectedList}`;
     return this.http.delete(`${endpoint}/${id}`)
       .pipe(
-        tap(x => console.log(x)),
+        //tap(x => console.log(x)),
         delay(this.delayMs)
       )
   }
@@ -79,7 +79,7 @@ export class ListService {
     const endpoint = `${this.url}/lists`;
     return this.http.get<string[]>(endpoint)
       .pipe(
-        tap(x => console.log(x)),
+        //tap(x => console.log(x)),
         delay(this.delayMs)
     )
   }

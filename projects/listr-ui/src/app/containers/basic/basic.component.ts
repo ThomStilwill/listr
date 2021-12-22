@@ -110,16 +110,19 @@ export class BasicComponent implements OnInit {
   }
 
   showNewItem(){
-    this.itemToAdd = new ListItem(null,'',false);
+    this.itemToAdd = new ListItem(null,'',false, this.items.length);
   }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-    console.log(event.previousIndex, event.currentIndex);
+    //console.log(event.previousIndex, event.currentIndex);
 
-    for(let i=0;i< this.items.length; i++) {
+    const min = Math.min(event.previousIndex, event.currentIndex);
+    const max = Math.max(event.previousIndex, event.currentIndex);
+
+    for(let i=min;i <= max; i++) {
       if(this.items[i].order != i) {
-        console.log(this.items[i], i);
+        //console.log(this.items[i], i);
         const item = Object.assign({},this.items[i])
         item.order = i;
         this.store.dispatch(actions.EditItem({item: item}));
