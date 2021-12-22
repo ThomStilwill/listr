@@ -6,7 +6,7 @@
   "todo": [
     {
       "id": 1,
-      "selected": false,
+      "selected": true,
       "name": "Get christmas dinner groceries"
     },
     {

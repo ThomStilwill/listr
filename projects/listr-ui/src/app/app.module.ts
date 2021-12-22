@@ -34,16 +34,17 @@ import * as fromLists from "./store/list.reducer";
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      items : ListReducer},{
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-        strictStateSerializability: true,
-        strictActionSerializability: true,
-        strictActionWithinNgZone: true,
-        strictActionTypeUniqueness: true,
-      }
-    }),
+      listr : ListReducer}
+      // ,{ runtimeChecks: {
+      //       strictStateImmutability: true,
+      //       strictActionImmutability: true,
+      //       strictStateSerializability: true,
+      //       strictActionSerializability: true,
+      //       strictActionWithinNgZone: true,
+      //       strictActionTypeUniqueness: true,
+      //     }
+      //  }
+    ),
     EffectsModule.forRoot([ListEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserAnimationsModule,

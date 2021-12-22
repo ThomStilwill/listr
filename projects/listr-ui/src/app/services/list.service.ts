@@ -4,7 +4,8 @@ import { delay, map } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { ListItem } from '../models/list-item.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app-state.model';
+import { AppState } from '../store/list.reducer';
+import * as listSelectors from '../store/list.selectors';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -14,9 +15,9 @@ export class ListService {
 
   delayMs: number = this.config.endpointDelayMs ?? 0;
   url = this.config.endpoint;
-  selectedList = 'general';
+  selectedList = '';
 
-  selectedList$ = this.store.select(store => store.items.selectedList);
+  selectedList$ = this.store.select(listSelectors.selectedList);
 
   constructor(private http: HttpClient,
               @Inject(APP_CONFIG) private config: AppConfig,

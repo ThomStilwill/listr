@@ -5,6 +5,10 @@ import { ListItem } from '../models/list-item.model';
 
 export const featureName = 'list';
 
+export interface AppState {
+  readonly listr: ListState
+}
+
 export interface ListState {
   list: ListItem[],
   lists: string[],
