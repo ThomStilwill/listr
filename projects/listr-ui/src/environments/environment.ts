@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   endpoint: 'http://localhost:3000',
-  endpointDelayMs: 500
+  endpointDelayMs: 0
 };

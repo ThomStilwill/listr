@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { ListItem } from '../models/list-item.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/list.reducer';
-import * as listSelectors from '../store/list.selectors';
+import * as listSelectors from '../store';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -43,6 +43,7 @@ export class ListService {
 
     return this.http.get<Array<ListItem>>(endpoint)
       .pipe(
+        tap(x => console.log(x)),
         delay(this.delayMs)
     )
   }
@@ -51,6 +52,7 @@ export class ListService {
     const endpoint = `${this.url}/${this.selectedList}`;
     return this.http.post(endpoint, newItem)
       .pipe(
+        tap(x => console.log(x)),
         delay(this.delayMs)
       )
   }
@@ -59,6 +61,7 @@ export class ListService {
     const endpoint = `${this.url}/${this.selectedList}`;
     return this.http.put(`${endpoint}/${item.id}`, item)
       .pipe(
+        tap(x => console.log(x)),
         delay(this.delayMs)
       )
   }
@@ -67,6 +70,7 @@ export class ListService {
     const endpoint = `${this.url}/${this.selectedList}`;
     return this.http.delete(`${endpoint}/${id}`)
       .pipe(
+        tap(x => console.log(x)),
         delay(this.delayMs)
       )
   }
@@ -75,6 +79,7 @@ export class ListService {
     const endpoint = `${this.url}/lists`;
     return this.http.get<string[]>(endpoint)
       .pipe(
+        tap(x => console.log(x)),
         delay(this.delayMs)
     )
   }

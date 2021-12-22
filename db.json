@@ -23,40 +23,51 @@
   "general": [
     {
       "id": "284514b9-cdb4-4fcd-b39e-75ad5839782c",
-      "name": "Trailer"
+      "selected": false,
+      "name": "Trailers",
+      "order": 0
     },
     {
       "id": "2fb6ec21-0b79-4ccf-9e09-0abf3b06e062",
-      "name": "Plane"
+      "selected": false,
+      "name": "Plane",
+      "order": 1
     },
     {
       "id": "e7dc098f-01fb-4114-aea7-783967e5e4ff",
-      "name": "Skates"
+      "selected": false,
+      "name": "Skates",
+      "order": 3
     },
     {
       "id": "767f7df2-d500-41dd-8b26-75d4b52977bc",
+      "selected": false,
       "name": "Things",
-      "selected": false
+      "order": 4
     },
     {
       "id": "ff4dd4d1-2c0a-49c8-9f95-940d0ae5296a",
       "selected": false,
-      "name": "Bits"
+      "name": "Bits",
+      "order": 5
     },
     {
       "id": "MxmeY_X",
       "selected": false,
-      "name": "Something New"
+      "name": "Something New",
+      "order": 2
     },
     {
       "id": "DWYdg-A",
       "selected": false,
-      "name": "Something Old"
+      "name": "Something Old",
+      "order": 6
     },
     {
       "id": "XgGqwPb",
       "selected": false,
-      "name": "My Stuff"
+      "name": "My Stuff",
+      "order": 7
     }
   ]
 }

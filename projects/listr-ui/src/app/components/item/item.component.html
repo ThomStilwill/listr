@@ -3,6 +3,7 @@
        fxLayout="row">
 
     <div fxFlex>
+        {{item.order}}
         <input type="checkbox" 
             [(ngModel)]="item.selected" 
             (input)="modelChanges($event)"

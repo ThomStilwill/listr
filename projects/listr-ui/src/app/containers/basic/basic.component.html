@@ -17,8 +17,8 @@
             <span *ngIf="(loading$ | async)">{{(loading$ | async)}}</span>
         </div>
         <div *ngIf="!selectedList">No list selected</div>
-        <ul>
-            <li *ngFor="let item of items">
+        <ul cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+            <li *ngFor="let item of items" class="example-box" cdkDrag>
                 <listr-item [item]="item" (saveItem)="saveItem($event)" (deleteItem)="deleteItem($event)"
                     (onStateChange)="onStateChange($event)">
                 </listr-item>

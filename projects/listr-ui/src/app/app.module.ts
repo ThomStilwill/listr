@@ -18,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';  
-import * as fromLists from "./store/list.reducer";
 
 @NgModule({
   declarations: [
