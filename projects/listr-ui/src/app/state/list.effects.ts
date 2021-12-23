@@ -20,7 +20,7 @@ export class ListEffects{
             mergeMap(() => this.listService.getlistItems()
                 .pipe(
                     tap(_=>console.log('load')),
-                    map(items => actions.LoadItemsSuccess({ list:items}))
+                    map(items => actions.LoadItemsSuccess({ items: items}))
                     )
                 ),
                 catchError(error => of(actions.LoadItemsFailure({loading:'',error})),

@@ -7,12 +7,19 @@
         <input type="checkbox" 
             [(ngModel)]="item.selected" 
             (input)="modelChanges($event)"
-            [ngModelOptions]="{standalone: true}"/>
+            [ngModelOptions]="{standalone: true}"
+            [readonly]="readonly()"
+            />
 
         <input  type=text 
             [(ngModel)]="item.name" 
             (input)="modelChanges($event)"
-            [ngModelOptions]="{standalone: true}"/>
+            [ngModelOptions]="{standalone: true}"
+            [readonly]="readonly()"
+            />
+
+            {{readonly()}}
+            {{editingId}}
     </div>
     <div fxFlex="6em" style="text-align: right">
         <button [hidden]="!dirty" (click)="save()" mat-icon-button title="Save">

@@ -19,8 +19,11 @@
         <div *ngIf="!selectedList">No list selected</div>
         <ul cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
             <li *ngFor="let item of items" class="example-box" cdkDrag>
-                <listr-item [item]="item" (saveItem)="saveItem($event)" (deleteItem)="deleteItem($event)"
-                    (onStateChange)="onStateChange($event)">
+                <listr-item [item]="item" 
+                            (saveItem)="saveItem($event)" 
+                            (deleteItem)="deleteItem($event)"
+                            (onStateChange)="onStateChange($event)"
+                            >
                 </listr-item>
             </li>
         </ul>
@@ -38,5 +41,8 @@
             <i class="material-icons">add</i>
         </button>
 
-        <span *ngIf="dirty">There are changes to the list.</span>
+        <span *ngIf="dirty">{{dirty}}There are changes to the list.</span>
     </div>
+
+<pre>Editing id: {{editingId}}</pre>
+<pre>{{items$ | async | json}}</pre>    

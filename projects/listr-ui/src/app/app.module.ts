@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppConfigModule } from './app-config.module';
 import { AppComponent } from './app.component';
+
 import { BasicComponent } from './containers/basic/basic.component';
 import { ItemComponent } from './components/item/item.component';
 import { ListService } from './services/list.service';
@@ -12,18 +13,21 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ListReducer } from './store/list.reducer';
-import { ListEffects } from './store/list.effects';
+import { ListReducer } from './state/list.reducer';
+import { ListEffects } from './state/list.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';  
+import { AboutComponent } from './about/about.component';
+import { BasicModule } from './basic/basic.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicComponent,
-    ItemComponent
+    ItemComponent,
+    AboutComponent
   ],
   imports: [
     AppConfigModule,
@@ -31,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BasicModule,
     AppRoutingModule,
     StoreModule.forRoot({
       listr : ListReducer}

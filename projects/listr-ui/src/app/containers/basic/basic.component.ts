@@ -3,12 +3,12 @@ import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { filter, map} from 'rxjs/operators';
 import { ListItem } from '../../models/list-item.model';
-import * as actions from '../../store/list.actions';
-import * as listSelectors from '../../store';
+import * as actions from '../../state/list.actions';
+import * as listSelectors from '../../state';
 import { InterComponentService } from '../../services/inter-component.service';
 import { AutoUnsubscribe } from '../../shared/auto-unsubscribe';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { ListState } from '../../store/list.reducer';
+import { ListState } from '../../state/list.reducer';
 
 
 @AutoUnsubscribe
@@ -29,6 +29,7 @@ export class BasicComponent implements OnInit {
   itemToAdd: ListItem = null;
   lists: string[];
   selectedList: string;
+  editingId: string;
 
   dirtyCount = 0;
   get dirty() { return this.dirtyCount != 0;}
@@ -50,6 +51,14 @@ export class BasicComponent implements OnInit {
     .subscribe(() => {
       this.itemToAdd = null;
     });
+
+    updates$.pipe(
+      ofType(actions.EditItemSuccess)
+    )
+    .subscribe(item => {
+      
+      console.log(item);
+    });
   }
 
   ngOnInit(): void {
@@ -69,7 +78,9 @@ export class BasicComponent implements OnInit {
         map((items:ListItem[]) => items.map(item => Object.assign({},item))
         )
       ).subscribe(items =>         
-        this.items =  items.sort((a,b) => a.order-b.order)
+        {
+          this.items = items.sort((a,b) => a.order-b.order);//.map(i=>i);
+        }
       );
 
     this.selectedList$
@@ -115,14 +126,10 @@ export class BasicComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-    //console.log(event.previousIndex, event.currentIndex);
-
     const min = Math.min(event.previousIndex, event.currentIndex);
     const max = Math.max(event.previousIndex, event.currentIndex);
-
     for(let i=min;i <= max; i++) {
       if(this.items[i].order != i) {
-        //console.log(this.items[i], i);
         const item = Object.assign({},this.items[i])
         item.order = i;
         this.store.dispatch(actions.EditItem({item: item}));

@@ -10,7 +10,7 @@ export interface AppState {
 }
 
 export interface ListState {
-  list: ListItem[],
+  items: ListItem[],
   lists: string[],
   selectedList: string,
   loading: string,
@@ -18,7 +18,7 @@ export interface ListState {
 }
 
 export const initialState: ListState = {
-  list: [],
+  items: [],
   lists: [],
   selectedList: '',
   loading: '',
@@ -33,7 +33,7 @@ export const ListReducer = createReducer(
     })),
     on(Actions.LoadItemsSuccess,(state,action) => ({
       ...state, 
-      list: action.list, 
+      items: action.items, 
       loading:''
     })),
     on(Actions.LoadItemsFailure,(state,action) => ({
@@ -46,7 +46,7 @@ export const ListReducer = createReducer(
     })),
     on(Actions.AddItemSuccess,(state,action) => ({
       ...state, 
-      list: [...state.list, action.item],
+      items: [...state.items, action.item],
       loading: ''
     })),
     on(Actions.AddItemFailure,(state,action) => ({
@@ -60,10 +60,9 @@ export const ListReducer = createReducer(
       loading:'Editing item...' 
     })),
     on(Actions.EditItemSuccess,(state,action) => {
-      const updatedList = state.list.map(item => action.item.id === item.id ? action.item : item);
       return {
         ...state,
-        list: updatedList,
+        items: state.items.map(item => action.item.id === item.id ? action.item : item),
         loading: ''
         };
     }),
@@ -80,7 +79,7 @@ export const ListReducer = createReducer(
     })),
     on(Actions.DeleteItemSuccess,(state,action) => ({
       ...state, 
-      list: state.list.filter(x=>x.id !== action.id), 
+      items: state.items.filter(x=>x.id !== action.id), 
       loading:''})),
     on(Actions.DeleteItemFailure,(state,action) => ({
       ...state, 

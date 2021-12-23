@@ -19,6 +19,8 @@ export class ItemComponent implements OnInit  {
   @Output() onStateChange = new EventEmitter<boolean>();
 
   @Input() item: ListItem;
+
+  editingId: string;
   originalItem: ListItem;
   dirty = false;
   subscription: Subscription;
@@ -28,17 +30,32 @@ export class ItemComponent implements OnInit  {
   ngOnInit(): void {
     this.originalItem = new ListItem(this.item.id, this.item.name, this.item.selected);
     this.subscription =  this.service.observable$.subscribe(event => {
-         this.reset();
-      });
+         
+      switch(event) {
+        case "reset" : 
+          this.reset();
+          break;
+        default:  
+          this.editingId = event;
+          break;
+      }
+    });
   }
 
   modelChanges(value): void {
     if(this.dirty) {return}
+    const command = this.item.id;
+    this.service.command(command);
+
     this.dirty = true;
     this.onStateChange.emit(true);
     console.log('change: ' , value);
   }
   
+  readonly(){
+    return this.editingId && this.editingId !== this.item.id;
+  }
+
   save(){
     if(this.item.id) {
       this.saveItem.emit(this.item);
@@ -46,6 +63,7 @@ export class ItemComponent implements OnInit  {
       this.addItem.emit(this.item);
      }
      this.onStateChange.emit(false);
+     this.service.command('');
   }
 
   delete(){
@@ -54,6 +72,7 @@ export class ItemComponent implements OnInit  {
 
   reset(){
     if(!this.dirty) {return}
+    this.service.command('');
     this.dirty = false;
     this.item.name = this.originalItem.name;
     this.item.selected = this.originalItem.selected;

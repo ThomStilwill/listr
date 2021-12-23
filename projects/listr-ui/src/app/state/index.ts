@@ -3,7 +3,7 @@ import { ListState } from "./list.reducer";
 
 export const featureSelector = createFeatureSelector<ListState>('listr');
 
-export const items = createSelector(featureSelector, state=>state.list);
+export const items = createSelector(featureSelector, state=>state.items);
 export const lists = createSelector(featureSelector, state=>state.lists);
 export const loading = createSelector(featureSelector, state=>state.loading);
 export const error = createSelector(featureSelector, state=>state.error);
