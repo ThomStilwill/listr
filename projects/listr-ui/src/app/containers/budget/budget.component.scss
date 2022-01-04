@@ -1,0 +1,67 @@
+ul, li {margin-left: 0; padding-left: 0;}
+ul{
+  list-style: none;
+}
+
+li {
+
+  background-color: lightgrey;
+  padding: 0.2em;
+  margin-bottom: 1px;;
+
+  div{
+    display: inline-block;
+  }
+
+  .name {
+    width: 18em;
+  }
+  .budget-amount {
+    width: 6em;
+    text-align: right;
+  }
+
+  .date {
+    width: 18em;
+  }
+  .amount {
+    width: 6em;
+    text-align: right;
+  }
+  .total{
+    width: 6em;
+    text-align: right;
+  }
+}
+
+.hidden{
+  display: none;
+}
+
+.positive {
+  background-color: lightseagreen;
+}
+
+.negative {
+  background-color: lightpink;
+}
+
+.calendar {
+width: 100%;
+  .week {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+
+    width: 100%;
+    background-color: lightskyblue;
+    .day {
+      flex-grow: 1;
+      height: 5em;
+      border: 1px solid gray;
+      background-color: lightgrey;
+      padding: 10px;
+    }
+  }
+}

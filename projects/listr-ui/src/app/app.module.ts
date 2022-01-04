@@ -18,16 +18,21 @@ import { ListEffects } from './state/list.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
-import { FlexLayoutModule } from '@angular/flex-layout';  
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AboutComponent } from './about/about.component';
 import { BasicModule } from './basic/basic.module';
+import { BudgetComponent } from './containers/budget/budget.component';
+import { DatePipe } from '@angular/common';
+import { DateAccessor } from './shared/components/date-accessor/date-accessor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicComponent,
     ItemComponent,
-    AboutComponent
+    AboutComponent,
+    BudgetComponent,
+    DateAccessor
   ],
   imports: [
     AppConfigModule,
@@ -53,9 +58,11 @@ import { BasicModule } from './basic/basic.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule 
+    FlexLayoutModule
   ],
-  providers: [ListService,
+  providers: [
+    DatePipe,
+    ListService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {
        ...new MatDialogConfig(),

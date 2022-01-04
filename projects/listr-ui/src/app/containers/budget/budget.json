@@ -1,0 +1,27 @@
+{
+  "items": [
+    { "name": "Thom Salary", "amount": 1310, "dow": "thursday", "week":"even"},
+    { "name": "Vicky Salary", "amount": 1480, "dow": "friday", "week":"odd"},
+    { "name": "House Cleaning", "amount": -105, "dow": "friday", "week":"even"},
+    { "name": "Groveries", "amount": -400, "dow": "friday", "week":"even"},
+    { "name": "Dog Food", "amount": -90, "dow": "friday", "week":"even"},
+    { "name": "Mortgage", "amount": -1380, "monthDay": 1},
+    { "name": "Rav4", "amount": -482, "monthDay": 8},
+    { "name": "Tacoma", "amount": -420, "monthDay": 16},
+    { "name": "BofA", "amount": -200, "monthDay": 28},
+    { "name": "Water", "amount": -40, "monthDay": 28},
+    { "name": "Exxon", "amount": -170, "monthDay": 12},
+    { "name": "T-Mobile", "amount": -205, "monthDay": 12},
+    { "name": "Amica", "amount": -236, "monthDay": 28},
+    { "name": "Comcast", "amount": -136, "monthDay": 12},
+    { "name": "Music", "amount": -240, "monthDay": 6},
+    { "name": "Services", "amount": -130, "monthDay": 12},
+    { "name": "Heating", "amount": -100, "monthDay": 12},
+    { "name": "Electric", "amount": -260, "monthDay": 12},
+    { "name": "Dance", "amount": -200, "monthDay": 26},
+    { "name": "Track", "amount": -300, "monthDay": 26},
+    { "name": "Property Tax", "amount": -120, "monthDay": 26},
+    { "name": "Sewer", "amount": -75, "monthDay": 26},
+    { "name": "Landscaping", "amount": -75, "monthDay": 26}
+  ]
+}

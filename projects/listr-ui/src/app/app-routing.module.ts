@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { BadRouteComponent } from './bad-route/bad-route.component';
 import { BasicComponent } from './containers/basic/basic.component';
+import { BudgetComponent } from './containers/budget/budget.component';
 
 const routes: Routes = [
-  { path: '', component: BasicComponent, pathMatch: 'full'},
+  { path: '', redirectTo:"budget", pathMatch: 'full'},
   { path: 'listr', component: BasicComponent},
+  { path: 'budget', component: BudgetComponent},
   { path: 'about', component: AboutComponent},
   { path: 'error', component: BadRouteComponent},
   { path: '**', component: BadRouteComponent}

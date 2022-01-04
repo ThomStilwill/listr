@@ -1,0 +1,52 @@
+
+<h3>Budget</h3>
+<ul class="hidden">
+  <li *ngFor="let item of items">
+    <div class="name">{{item.name}}</div>
+    <div class="budget-amount">{{item.amount}}</div>
+  </li>
+</ul>
+
+<h3>Calendar</h3>
+
+<div></div>
+<label>
+  Start Date
+  <input type="date"
+         [(ngModel)]="startDate"
+         (ngModelChange)="modelChanges($event)"
+         [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+</label>
+
+<label>
+  End Date
+  <input type="date"
+         [(ngModel)]="endDate"
+         (ngModelChange)="modelChanges($event)"
+         [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+</label>
+
+<label>
+  Start Amount
+  <input type="number"
+         [(ngModel)]="startAmount"
+         (ngModelChange)="modelChanges($event)"
+         [ngModelOptions]="{standalone: true, updateOn: 'blur'}">
+</label>
+
+<ul>
+  <li *ngFor="let budgetDate of budgetDates" [ngClass]="{hidden: budgetDate.amount===0,positive: budgetDate.amount > 0,negative: budgetDate.amount < 0}">
+    <div class="date">{{budgetDate.date | date: "MMMM d, y  EEEE"}}</div>
+    <div class="amount">{{budgetDate.weekNumber}}</div>
+    <div class="amount">{{budgetDate.amount | number: "0.0-0"}}</div>
+    <div class="total">{{budgetDate.total | number: "0.0-0"}}</div>
+  </li>
+</ul>
+
+<div class="calendar">
+  <div class="week" *ngFor="let week of [0,1,2,3,4]">
+    <div class="day" *ngFor="let day of [0,1,2,3,4,5,6]">
+      {{day}}
+    </div>
+  </div>
+</div>

@@ -8,7 +8,7 @@
       "id": 1,
       "selected": false,
       "name": "Get christmas dinner groceries",
-      "order": 0
+      "order": 1
     },
     {
       "id": 2,
@@ -20,7 +20,7 @@
       "id": 3,
       "selected": false,
       "name": "Alfredo sauce width chicken",
-      "order": 1
+      "order": 0
     }
   ],
   "general": [
